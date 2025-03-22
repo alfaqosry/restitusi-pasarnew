@@ -21,6 +21,13 @@
                         <h3 class="card-title mb-0">Tagihan Restribusi</h3>
                     </div>
                     <div class="card-body pt-4">
+
+                    @if($totaltagihan > 0)
+                    <div class="alert alert-danger">Anda memiliki {{$totaltagihan}}  tagihan restetusi, Silahkan melakukan pembayaran</div>
+
+                    @else
+                    <div class="alert alert-success">Anda tidak memiliki tagihan. Terimakasi telah membayar tepat waktu.</div>
+                    @endif
                         <div class="grid-margin">
                             <div class="">
                                 <div class="panel panel-primary">

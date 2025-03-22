@@ -27,11 +27,11 @@
                                 href="{{ route('dashboard.index') }}"><i class="side-menu__icon fe fe-home"></i><span
                                     class="side-menu__label">Dashboard</span></a>
                         </li>
-                        <li class="slide">
+                        <!-- <li class="slide">
                             <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('toko.index') }}"><i
                                     class="side-menu__icon fe fe-shopping-bag"></i><span
                                     class="side-menu__label">Toko</span></a>
-                        </li>
+                        </li> -->
 
 
                         <li class="slide">
@@ -87,15 +87,14 @@
                 </li>
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide"
-                        href="{{ route('sewatempat.getsewabyid', Auth()->user()->id) }}"><i
-                            class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Tempat Dagangan
-                            Saya</span></a>
+                        href="{{ route('transaction.riwayattransaksipedagang') }}"><i
+                            class="side-menu__icon fe fe-home"></i><span class="side-menu__label">Riwayat Tagihan</span></a>
                 </li>
-                <li class="slide">
+                <!-- <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide"
                         href="{{ route('sewatempat.index') }}"><i class="side-menu__icon fe fe-home"></i><span
                             class="side-menu__label">Sewa Tempat</span></a>
-                </li>
+                </li> -->
                 @endrole
 
              

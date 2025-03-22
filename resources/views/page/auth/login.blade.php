@@ -7,16 +7,15 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords"
-        content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="description" content="Pasar Kuok">
+    <meta name="author" content="Pasar Kuok">
+    <meta name="keywords" content="Pasar Kuok">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('sash/assets/images/brand/favicon.ico') }}">
 
     <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Login – Sistem Restitusi Pasar Kuok</title>
 
     <!-- BOOTSTRAP CSS -->
     <link id="style" href="{{ asset('sash/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -36,7 +35,10 @@
 
 </head>
 
-<body class="app sidebar-mini ltr login-img">
+<body class="app sidebar-mini ltr "
+    style="background-image: url('/img/pasar-kuok.jpg');background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;">
 
     <!-- BACKGROUND-IMAGE -->
     <div class="">
@@ -53,7 +55,9 @@
                 <!-- Theme-Layout -->
 
                 <!-- CONTAINER OPEN -->
+
                 <div class="col col-login mx-auto mt-7">
+                    <h3 class="text-center text-white">SELAMAT DATANG DI SISTEM RESTITUSI PASAR KUOK</h3>
                     <div class="text-center">
                         <a href="index.html"><img src="../assets/images/brand/logo-white.png" class="header-brand-img"
                                 alt=""></a>
@@ -91,7 +95,8 @@
 
                                                 <input
                                                     class="input100 border-start-0 form-control ms-0 @error('email') is-invalid @enderror"
-                                                    type="email" name="email"  value="{{old('email')}}" placeholder="Email">
+                                                    type="email" name="email" value="{{ old('email') }}"
+                                                    placeholder="Email">
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

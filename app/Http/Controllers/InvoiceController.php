@@ -24,9 +24,13 @@ class InvoiceController extends Controller
     public function tagihbyid($id)
     {
         $tagihan = Invoice::where('user_id', $id)->get();
+        $totaltagihan = Invoice::where('user_id', $id)->where('status', 'pending')->count();
 
-        return view('page.tagihan.tagihanbyid', compact('tagihan'));
+        return view('page.tagihan.tagihanbyid', compact('tagihan', 'totaltagihan'));
     }
+
+
+  
 
     /**
      * Show the form for creating a new resource.

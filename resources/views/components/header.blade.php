@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                             </div>
-                       
+
                             <!-- COUNTRY -->
                             <div class="d-flex">
                                 <a class="nav-link icon theme-layout nav-link-bg layout-setting">
@@ -46,15 +46,15 @@
                                 </a>
                             </div>
                             <!-- Theme-Layout -->
-                      
+
                             <!-- CART -->
                             <div class="dropdown d-flex">
                                 <a class="nav-link icon full-screen-link nav-link-bg">
                                     <i class="fe fe-minimize fullscreen-button"></i>
                                 </a>
                             </div>
-                       
-                       
+
+
                             <!-- SIDE-MENU -->
                             <div class="dropdown d-flex profile-1">
                                 <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
@@ -79,9 +79,11 @@
                                     <a class="dropdown-item" href="lockscreen.html">
                                         <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                                     </a>
-                                    <a class="dropdown-item" href="login.html">
-                                        <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
-                                    </a>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item"><i class="dropdown-icon fe fe-alert-circle"></i> Logout</button>
+                                    </form>
+                                   
                                 </div>
                             </div>
                         </div>

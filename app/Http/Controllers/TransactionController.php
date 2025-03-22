@@ -6,7 +6,9 @@ use App\Models\Transaction;
 use App\Models\Invoice;
 use App\Models\Sewatempat;
 use App\Models\Toko;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransactionController extends Controller
 {
@@ -60,6 +62,29 @@ class TransactionController extends Controller
         $invoice->status = "success";
         $invoice->save();
         return redirect()->route('dashboard.index')->with('success', 'Pembayaran Manual berhasil');
+    }
+
+    public function riwayattransaksipedagang(){
+
+        $transaction = Transaction::with('invoice')->where('user_id', auth()->user()->id)->get();
+        $invoice = Invoice::where('user_id', auth()->user()->id)->where('status', 'pending')->get();
+
+ 
+        return view('page.transaction.riwayattagihanpedagang', compact('transaction', 'invoice'));
+    }
+
+    public function buktipembayaran(Transaction $transaction) {
+
+        $pdf = Pdf::loadView('page.transaction.buktipdf', [
+            'user' => $transaction->user->pedagang->name,
+            'amount' => $transaction->price,
+            'paymentDate' => $transaction->created_at,
+            'paymentMethod' => $transaction->metode_pembayaran,
+            'receiptNumber' => $transaction->order_id,
+        ]);
+
+        return $pdf->download('buktipembayara' . $transaction->order_id .'.pdf');
+        
     }
 
     /**

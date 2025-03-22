@@ -15,6 +15,7 @@ class PedagangController extends Controller
     public function index()
     {
         $pedagang = User::with('pedagang')->where('role', 'pedagang')->get();
+    
         return view('page.pedagang.index', compact('pedagang'));
     }
 
@@ -41,6 +42,7 @@ class PedagangController extends Controller
             'role' => 'required|string|max:20',
             'no_hp' => 'required|string|max:15',
             'alamat' => 'required|string',
+            'tgl_lahir' => 'required',
             'jenis_dagangan' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -57,7 +59,7 @@ class PedagangController extends Controller
             'password' => Hash::make($request->password),
         ])->assignRole($request->role);
 
-        $user->pedagang->create([
+        $user->pedagang()->create([
             'name' => $request->name,
             'nik' => $request->nik,
             'no_hp' => $request->no_hp,

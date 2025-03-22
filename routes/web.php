@@ -39,6 +39,9 @@ Route::post('/verifikasiakun/update/{id}', [VerifikasiakunController::class, 'up
 Route::get('/verifikasiakun/terima/{id}', [VerifikasiakunController::class, 'terima'])->name('verifikasi.terima');
 
 Route::middleware(['auth', 'is_active'])->group(function () {
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/toko', [TokoController::class, 'index'])->name('toko.index');
     Route::get('/toko/create', [TokoController::class, 'create'])->name('toko.create');
@@ -61,12 +64,17 @@ Route::middleware(['auth', 'is_active'])->group(function () {
     Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
     Route::get('/transaction/success/{transaction}', [TransactionController::class, 'success'])->name('transaction.success');
     Route::get('/transaction/manual/{invoice}', [TransactionController::class, 'pembayaranmanual'])->name('transaction.manual');
+    Route::get('/transaction/riwayat-transaksi-pedagang', [TransactionController::class, 'riwayattransaksipedagang'])->name('transaction.riwayattransaksipedagang');
+    Route::get('/bukti-pembayaran/{transaction}', [TransactionController::class, 'buktipembayaran'])->name('transaction.bukti-pembayaran');
+    
 
     Route::get('/invoice/{id}', [InvoiceController::class, 'tagihbyid'])->name('transaction.tagihbyid');
     Route::get('/invoice', [InvoiceController::class, 'index'])->name('transaction.tagihanall');
     Route::get('/invoice/show/{id}', [InvoiceController::class, 'show'])->name('transaction.show');
 
     Route::get('/laporankeuangan', [LaporankeuanganController::class, 'laporankeuangan'])->name('laporankeuangan.bulanan');
+    Route::get('/laporan-restitusi-pdf', [LaporanKeuanganController::class, 'generatePDF'])->name('laporanrestitusi.pdf');
+
 
 
 

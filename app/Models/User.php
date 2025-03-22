@@ -53,6 +53,11 @@ class User extends Authenticatable
         return $this->hasMany(Invoice::class);
     }
 
+    public function transaksi()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
 
     public function pedagang()
     {

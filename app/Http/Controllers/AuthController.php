@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -33,8 +34,12 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-
-            return redirect()->route('dashboard.index')->with('success', 'Login successful');
+            if (auth()->user()->hasRole('pedagang')) {
+                return redirect()->route('transaction.tagihbyid', Auth()->user()->id)->with('success', 'Login successful');
+            }elseif(auth()->user()->hasRole('admin')){
+                return redirect()->route('dashboard.index')->with('success', 'Login successful');
+            }
+           
         }
 
         return back()->withErrors([
@@ -78,10 +83,10 @@ class AuthController extends Controller
             'role' => 'pedagang',
             'is_active' => false,
             'password' => Hash::make($request->password),
-        ]);
+        ])->assignRole('pedagang');
         $user->pedagang()->create([
             'name' => $request->name,
-          
+
         ]);
 
         $user->verifikasiakun()->create([
@@ -89,7 +94,7 @@ class AuthController extends Controller
             "keterangan" => "Silahkan ajukan"
 
         ]);
-    
+
         return redirect()->route('login')->with('success', 'Akun berhasil dibuat.');
     }
 
@@ -124,5 +129,15 @@ class AuthController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function logout()
+    {
+        Auth::logout();
+
+        // Optional: Regenerate the session to avoid session fixation attacks
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/'); // Redirect user to home page or login page
     }
 }
